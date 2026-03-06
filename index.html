@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>KhanApparels – Designed for your Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0D0D;--bg2:#141414;--bg3:#1C1C1C;--bg4:#242424;
+  --border:#2A2A2A;--border2:#383838;
+  --red:#E84A1A;--red-deep:#C03A10;
+  --off:#F0EDE8;--muted:#888;--dim:#555;--success:#3DBA6F;
+  --font-head:'Barlow Condensed',sans-serif;
+  --font-body:'Barlow',sans-serif;
+  --r:12px;--r-sm:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--off);overflow-x:hidden;min-height:100vh;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+/* ── HEADER ── */
+header{background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 16px;}
+.header-inner{max-width:540px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;}
+.brand-name{font-family:var(--font-head);font-size:26px;font-weight:900;letter-spacing:1px;color:#fff;line-height:1;text-transform:uppercase;}
+.brand-name span{color:var(--red);}
+.brand-tag{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.cart-btn{background:var(--red);color:#fff;border:none;border-radius:50px;padding:10px 18px;font-family:var(--font-head);font-size:15px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .2s;}
+.cart-btn:active{background:var(--red-deep);}
+.cart-count{background:#fff;color:var(--red);border-radius:50%;font-size:10px;font-weight:900;min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px;font-family:var(--font-body);}
+.cart-count.hidden{display:none;}
+
+/* ── HERO ── */
+.hero{background:var(--bg2);border-bottom:1px solid var(--border);padding:32px 20px 28px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(232,74,26,0.09),transparent);pointer-events:none;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(232,74,26,0.08);border:1px solid rgba(232,74,26,0.25);color:var(--red);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:16px;}
+.hero h2{font-family:var(--font-head);font-size:44px;font-weight:900;line-height:1;text-transform:uppercase;letter-spacing:1px;color:#fff;margin-bottom:10px;}
+.hero h2 em{color:var(--red);font-style:normal;}
+.hero-sub{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:20px;}
+.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.hero-pill{background:var(--bg3);border:1px solid var(--border2);color:var(--off);font-size:11px;font-weight:600;padding:6px 13px;border-radius:6px;}
+
+/* ── FILTERS ── */
+.filters{background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px;overflow-x:auto;scrollbar-width:none;}
+.filters::-webkit-scrollbar{display:none;}
+.filter-row{display:flex;gap:8px;min-width:max-content;max-width:540px;margin:0 auto;}
+.filter-btn{padding:8px 18px;border-radius:6px;border:1.5px solid var(--border2);background:transparent;font-family:var(--font-head);font-size:14px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .18s;}
+.filter-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+
+/* ── PRODUCTS ── */
+.products-section{max-width:540px;margin:0 auto;padding:18px 14px 100px;}
+.section-label{font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* ── CARD ── */
+.product-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;}
+.product-card:active{transform:scale(0.97);}
+.card-img-wrap{position:relative;overflow:hidden;aspect-ratio:1;background:var(--bg3);}
+.product-card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+.product-card:active .product-card-img{transform:scale(1.03);}
+/* Fallback placeholder when image fails */
+.img-placeholder{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  background:var(--bg3);color:var(--dim);font-size:11px;
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:1px;
+}
+.img-placeholder .shoe-icon{font-size:36px;}
+.card-tag{position:absolute;top:9px;left:9px;background:var(--red);color:#fff;font-family:var(--font-head);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.card-ship{position:absolute;top:9px;right:9px;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);color:var(--off);font-size:8px;font-weight:700;letter-spacing:1px;padding:3px 7px;border-radius:4px;border:1px solid var(--border2);}
+.product-card-body{padding:12px 12px 14px;}
+.product-card-name{font-family:var(--font-head);font-size:15px;font-weight:700;text-transform:uppercase;line-height:1.2;color:#fff;margin-bottom:4px;}
+.product-card-sub{font-size:11px;color:var(--dim);margin-bottom:10px;}
+.price-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:11px;}
+.card-price{font-family:var(--font-head);font-size:20px;font-weight:900;color:#fff;}
+.card-mrp{font-size:11px;color:var(--dim);text-decoration:line-through;}
+.card-save{font-size:10px;font-weight:700;color:var(--success);background:rgba(61,186,111,0.1);padding:2px 7px;border-radius:4px;}
+.card-actions{display:flex;gap:7px;}
+.btn-view{flex:1;padding:9px 0;border-radius:var(--r-sm);border:1.5px solid var(--border2);background:transparent;font-family:var(--font-head);font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .18s;}
+.btn-view:active{border-color:var(--red);color:var(--red);}
+.btn-cart-quick{flex:1;padding:9px 0;border-radius:var(--r-sm);border:none;background:var(--red);font-family:var(--font-head);font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#fff;cursor:pointer;transition:background .18s;}
+.btn-cart-quick:active{background:var(--red-deep);}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(5px);}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-sheet{background:var(--bg2);border:1px solid var(--border);border-bottom:none;border-radius:22px 22px 0 0;width:100%;max-width:540px;margin:0 auto;max-height:93vh;overflow-y:auto;transform:translateY(60px);transition:transform .32s cubic-bezier(.32,1,.56,1);scrollbar-width:none;padding-bottom:env(safe-area-inset-bottom,24px);}
+.modal-overlay.open .modal-sheet{transform:translateY(0);}
+.modal-sheet::-webkit-scrollbar{display:none;}
+.modal-handle{width:36px;height:4px;background:var(--border2);border-radius:2px;margin:12px auto 0;}
+.modal-close{position:absolute;top:14px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);font-size:15px;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:color .15s,border-color .15s;}
+.modal-close:active{color:var(--red);border-color:var(--red);}
+
+/* ── DETAIL GALLERY ── */
+.detail-gallery{padding:16px 16px 0;}
+.gallery-main-wrap{width:100%;aspect-ratio:1;background:var(--bg3);border-radius:var(--r);overflow:hidden;position:relative;}
+.gallery-main{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .2s;}
+.gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.gallery-thumbs::-webkit-scrollbar{display:none;}
+.gallery-thumb-wrap{width:64px;height:64px;flex-shrink:0;border-radius:8px;overflow:hidden;border:2px solid transparent;transition:border-color .15s;cursor:pointer;background:var(--bg3);}
+.gallery-thumb-wrap.active{border-color:var(--red);}
+.gallery-thumb{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* ── DETAIL BODY ── */
+.detail-body{padding:18px 18px 24px;}
+.detail-name{font-family:var(--font-head);font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:0.5px;color:#fff;line-height:1.1;margin-bottom:10px;}
+.detail-price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.detail-price{font-family:var(--font-head);font-size:32px;font-weight:900;color:#fff;}
+.detail-mrp{font-size:14px;color:var(--dim);text-decoration:line-through;}
+.detail-save{font-size:12px;font-weight:700;color:var(--success);background:rgba(61,186,111,0.1);padding:3px 10px;border-radius:50px;}
+.detail-badges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;}
+.detail-badge{display:flex;align-items:center;gap:5px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 11px;font-size:11px;font-weight:600;color:var(--muted);}
+.detail-section-title{font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+
+/* ── SIZES ── */
+.size-selector{margin-bottom:20px;}
+.size-grid{display:flex;flex-wrap:wrap;gap:7px;}
+.size-btn{min-width:56px;height:52px;border-radius:8px;border:1.5px solid var(--border2);background:var(--bg3);font-family:var(--font-body);font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;transition:all .15s;padding:0 8px;}
+.size-btn .eu{font-size:9px;font-weight:500;color:var(--dim);}
+.size-btn.selected{background:var(--red);border-color:var(--red);color:#fff;}
+.size-btn.selected .eu{color:rgba(255,255,255,0.65);}
+.size-hint{font-size:11px;color:var(--red);margin-top:8px;font-weight:600;display:none;}
+.size-hint.show{display:block;}
+.detail-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.detail-specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px;}
+.spec-item{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.spec-label{font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px;}
+.spec-value{font-size:13px;font-weight:700;color:var(--off);margin-top:4px;}
+.btn-add-to-cart{width:100%;padding:17px;border-radius:var(--r);border:none;background:var(--red);color:#fff;font-family:var(--font-head);font-size:18px;font-weight:900;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.btn-add-to-cart:disabled{background:var(--bg4);color:var(--dim);border:1.5px solid var(--border2);cursor:not-allowed;}
+.btn-add-to-cart:not(:disabled):active{background:var(--red-deep);transform:scale(0.98);}
+
+/* ── CART ── */
+.cart-modal-header{padding:18px 18px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg2);z-index:5;}
+.cart-modal-title{font-family:var(--font-head);font-size:22px;font-weight:900;text-transform:uppercase;color:#fff;}
+.cart-empty{text-align:center;padding:48px 24px;}
+.cart-empty .icon{font-size:44px;margin-bottom:12px;}
+.cart-empty p{font-size:14px;color:var(--dim);}
+.cart-items{padding:10px 14px;}
+.cart-item{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--border);animation:fadeUp .2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cart-item-img{width:68px;height:68px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--bg3);border:1px solid var(--border);}
+.cart-item-info{flex:1;min-width:0;}
+.cart-item-name{font-family:var(--font-head);font-size:14px;font-weight:700;text-transform:uppercase;color:#fff;line-height:1.2;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cart-item-size{font-size:11px;color:var(--dim);margin-bottom:8px;}
+.cart-item-controls{display:flex;align-items:center;gap:10px;}
+.qty-btn{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--border2);background:var(--bg3);font-size:16px;color:var(--off);cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1;transition:border-color .15s;}
+.qty-btn:active{border-color:var(--red);color:var(--red);}
+.qty-display{font-size:15px;font-weight:700;min-width:18px;text-align:center;color:#fff;}
+.cart-item-price{font-family:var(--font-head);font-size:17px;font-weight:900;color:#fff;flex-shrink:0;}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:var(--dim);font-size:16px;padding:4px;transition:color .15s;}
+.cart-item-remove:active{color:var(--red);}
+.cart-footer{position:sticky;bottom:0;background:var(--bg2);border-top:1px solid var(--border);padding:14px 18px 22px;}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;}
+.cart-total-label{font-size:13px;color:var(--muted);}
+.cart-total-amount{font-family:var(--font-head);font-size:26px;font-weight:900;color:#fff;}
+.btn-checkout{width:100%;padding:16px;border-radius:var(--r);border:none;background:var(--red);color:#fff;font-family:var(--font-head);font-size:18px;font-weight:900;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .18s;}
+.btn-checkout:active{background:var(--red-deep);}
+
+/* ── CHECKOUT ── */
+.checkout-header{padding:18px 18px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg2);z-index:5;}
+.checkout-header h2{font-family:var(--font-head);font-size:22px;font-weight:900;text-transform:uppercase;color:#fff;}
+.back-btn{background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);padding:2px 6px 2px 0;transition:color .15s;}
+.back-btn:active{color:var(--red);}
+.checkout-body{padding:18px;}
+.order-summary-mini{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:20px;}
+.order-summary-mini h3{font-family:var(--font-head);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.order-table{width:100%;border-collapse:collapse;}
+.order-table thead tr{border-bottom:1px solid var(--border);}
+.order-table thead th{font-family:var(--font-head);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:0 0 8px;text-align:left;}
+.order-table thead th:last-child{text-align:right;}
+.order-table tbody tr{border-bottom:1px solid rgba(42,42,42,0.5);}
+.order-table tbody td{padding:9px 0;font-size:12px;color:var(--muted);vertical-align:middle;}
+.order-table tbody td:last-child{text-align:right;font-weight:700;color:var(--off);}
+.order-table td .item-name{color:var(--off);font-weight:600;font-size:12px;line-height:1.3;display:block;}
+.order-table td .item-qty{color:var(--dim);font-size:11px;}
+.order-size-pill{display:inline-block;background:rgba(232,74,26,0.12);border:1px solid rgba(232,74,26,0.3);color:var(--red);font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;font-family:var(--font-head);letter-spacing:0.5px;}
+.order-mini-total{display:flex;justify-content:space-between;font-family:var(--font-head);font-size:17px;font-weight:900;color:#fff;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+.free-ship-note{font-size:11px;color:var(--success);font-weight:600;margin-top:8px;}
+.form-group{margin-bottom:15px;}
+.form-group label{display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:7px;}
+.form-group input,.form-group textarea{width:100%;padding:14px 15px;border-radius:var(--r-sm);border:1.5px solid var(--border2);background:var(--bg3);font-family:var(--font-body);font-size:15px;color:var(--off);outline:none;transition:border-color .18s;-webkit-appearance:none;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--dim);}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--red);}
+.form-group textarea{resize:none;height:80px;}
+.btn-place-order{width:100%;padding:17px;margin-top:8px;border-radius:var(--r);border:none;background:var(--red);color:#fff;font-family:var(--font-head);font-size:18px;font-weight:900;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.btn-place-order:active{background:var(--red-deep);}
+.btn-place-order:disabled{background:var(--bg4);color:var(--dim);cursor:not-allowed;}
+
+/* ── SUCCESS ── */
+.success-body{padding:40px 24px;text-align:center;}
+.success-icon{width:76px;height:76px;background:rgba(61,186,111,0.1);border:2px solid rgba(61,186,111,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 20px;}
+.success-title{font-family:var(--font-head);font-size:32px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:10px;}
+.success-msg{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:28px;}
+.btn-whatsapp{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:var(--r);border:none;background:#25D366;color:#fff;font-family:var(--font-head);font-size:17px;font-weight:900;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;margin-bottom:10px;transition:background .18s;}
+.btn-whatsapp:active{background:#1ebd5b;}
+.btn-continue{display:block;width:100%;padding:14px;border-radius:var(--r);border:1.5px solid var(--border2);background:transparent;font-family:var(--font-head);font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);cursor:pointer;text-align:center;transition:all .15s;}
+.btn-continue:active{border-color:var(--red);color:var(--red);}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:28px 20px;text-align:center;}
+.footer-brand{font-family:var(--font-head);font-size:22px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:4px;}
+.footer-brand span{color:var(--red);}
+.footer-tag{font-size:10px;color:var(--dim);letter-spacing:2px;margin-bottom:16px;}
+.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
+.footer-links a{color:var(--muted);font-size:12px;text-decoration:none;}
+.footer-copy{font-size:10px;color:var(--dim);}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--bg3);border:1px solid var(--border2);color:var(--off);padding:11px 22px;border-radius:50px;font-size:13px;font-weight:600;z-index:500;opacity:0;transition:opacity .22s,transform .22s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 24px rgba(0,0,0,0.6);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:7px;vertical-align:middle;}
+.no-products{grid-column:1/-1;text-align:center;padding:48px 0;color:var(--dim);font-size:14px;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-name">Khan<span>Apparels</span></div>
+      <div class="brand-tag">Designed for your Journey</div>
+    </div>
+    <button class="cart-btn" onclick="openCart()">
+      🛒 Cart
+      <span class="cart-count hidden" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">⚡ New Arrivals 2025</div>
+  <h2>Premium Kicks,<br><em>Showroom</em> Grade</h2>
+  <p class="hero-sub">Lucknow's go-to for authentic-grade sneakers.<br>Straight from the box to your feet.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">📦 OG Box Pack</span>
+    <span class="hero-pill">🚚 Free Shipping PAN India</span>
+    <span class="hero-pill">✅ Exact Showroom Quality</span>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filter-row" id="filterRow">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="footwear">Footwear</button>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <p class="section-label" id="productLabel">3 Products</p>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Khan<span>Apparels</span></div>
+  <div class="footer-tag">Designed for your Journey · Lucknow, UP</div>
+  <div class="footer-links">
+    <a href="mailto:Shadabkicks@gmail.com">✉ Email</a>
+    <a href="tel:+918999870771">📞 +91 89998 70771</a>
+    <a href="https://wa.me/918999870771" target="_blank">💬 WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2025 KhanApparels. All rights reserved.</div>
+</footer>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cartModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="cart-modal-header">
+      <span class="cart-modal-title">Your Cart</span>
+      <button class="modal-close" style="position:relative;top:0;right:0;" onclick="closeModal('cartModal')">✕</button>
+    </div>
+    <div id="cartContent"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Grand Total</span>
+        <span class="cart-total-amount" id="cartTotal">₹0</span>
+      </div>
+      <button class="btn-checkout" onclick="openCheckout()">Proceed to Checkout →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="checkout-header">
+      <button class="back-btn" onclick="closeModal('checkoutModal')">←</button>
+      <h2>Place Order</h2>
+    </div>
+    <div class="checkout-body">
+      <div class="order-summary-mini" id="orderSummaryMini"></div>
+
+      <!-- NATIVE FORM → posts directly to Formspree, no fetch needed -->
+      <form
+        id="checkoutForm"
+        action="https://formspree.io/f/xjgeqwjo"
+        method="POST"
+        target="_blank"
+        onsubmit="return handleSubmit(event)"
+      >
+        <input type="hidden" name="_subject" value="🔥 New Order – KhanApparels">
+        <input type="hidden" name="cart_summary" id="hiddenCart">
+        <input type="hidden" name="grand_total"  id="hiddenTotal">
+        <!-- Redirect after submission: back to same page -->
+        <input type="hidden" name="_next" id="hiddenNext">
+
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" name="customer_name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+        </div>
+        <div class="form-group">
+          <label>Delivery Address *</label>
+          <textarea name="address" placeholder="House no, Street, City, Pincode" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Special Instructions</label>
+          <textarea name="instructions" placeholder="Any requests? (optional)"></textarea>
+        </div>
+        <button class="btn-place-order" type="submit" id="placeOrderBtn">Place Order →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="success-body">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Order Placed!</div>
+      <p class="success-msg">
+        Thank you! <strong style="color:#fff">KhanApparels</strong> will contact you on WhatsApp to confirm your order, availability, and delivery details.
+      </p>
+      <a class="btn-whatsapp" href="https://wa.me/918999870771" target="_blank">💬 Continue on WhatsApp</a>
+      <button class="btn-continue" onclick="continueShopping()">Back to Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="toast-dot"></span><span id="toastMsg"></span></div>
+
+<script>
+// ── PRODUCTS ──────────────────────────────────────────────────────────────
+const products = [
+  {
+    id:"p1", name:"Reebok Classic Full White", price:2999, mrp:3999,
+    images:[
+      "https://i.ibb.co/1YSx3G04/Whats-App-Image-2026-02-28-at-6-24-48-AM.jpg",
+      "https://i.ibb.co/rKhQDTQp/Whats-App-Image-2026-02-28-at-6-24-45-AM.jpg",
+      "https://i.ibb.co/jv5mR3Fs/Whats-App-Image-2026-02-28-at-6-24-41-AM.jpg"
+    ],
+    sizes:[{uk:6.5,eu:40},{uk:7,eu:41},{uk:7.5,eu:41.5},{uk:8,eu:42},{uk:8.5,eu:42.5},{uk:9,eu:43},{uk:9.5,eu:44}],
+    description:"The iconic Reebok Classic in a clean all-white colourway. Exact showroom quality with premium materials. Comes in OG box with butter paper — just like picking it off the shelf.",
+    material:"Leather Upper", delivery:"3–7 Business Days", stock:"In Stock", category:"footwear"
+  },
+  {
+    id:"p2", name:"Jordan 1 Low Shadow Brown", price:2999, mrp:3999,
+    images:[
+      "https://i.ibb.co/mrSwN7Gw/Whats-App-Image-2026-02-27-at-5-09-23-PM.jpg",
+      "https://i.ibb.co/CpPKmjxd/Whats-App-Image-2026-02-27-at-5-09-25-PM.jpg",
+      "https://i.ibb.co/p6c7htxb/Whats-App-Image-2026-02-27-at-5-09-27-PM.jpg"
+    ],
+    sizes:[{uk:6,eu:40},{uk:6.5,eu:40.5},{uk:7,eu:41},{uk:7.5,eu:41.5},{uk:8,eu:42},{uk:8.5,eu:42.5},{uk:9,eu:43},{uk:9.5,eu:43.5},{uk:10,eu:44.5}],
+    description:"Jordan 1 Low in the coveted Shadow Brown colourway. Street-ready silhouette with showroom-grade construction. Full OG packaging with butter paper — the complete unboxing experience.",
+    material:"Leather / Synthetic", delivery:"3–7 Business Days", stock:"In Stock", category:"footwear"
+  },
+  {
+    id:"p3", name:"Adidas Superstar Tokyo Grey Red", price:2999, mrp:3999,
+    images:[
+      "https://i.ibb.co/6c8Rj2FJ/Whats-App-Image-2026-02-26-at-3-52-21-AM.jpg",
+      "https://i.ibb.co/5g2d4pKX/Whats-App-Image-2026-02-26-at-3-52-25-AM.jpg",
+      "https://i.ibb.co/jvzydqN3/Whats-App-Image-2026-02-26-at-3-52-23-AM.jpg"
+    ],
+    sizes:[{uk:6.5,eu:40},{uk:7,eu:41},{uk:7.5,eu:41.5},{uk:8,eu:42},{uk:8.5,eu:42.5},{uk:9,eu:43},{uk:9.5,eu:44}],
+    description:"Adidas Originals Superstar in the Tokyo Grey Red edition. A street classic reborn with an exclusive colourway. Exact showroom quality — OG box + butter paper included.",
+    material:"Leather Shell Toe", delivery:"3–7 Business Days", stock:"In Stock", category:"footwear"
+  }
+];
+
+// ── CART ──────────────────────────────────────────────────────────────────
+let cart = JSON.parse(localStorage.getItem('ka_cart') || '[]');
+function saveCart(){ localStorage.setItem('ka_cart', JSON.stringify(cart)); }
+
+function addToCart(pid, size){
+  const p = products.find(x => x.id === pid); if(!p) return;
+  const key = pid + '_' + size;
+  const ex = cart.find(i => i.key === key);
+  if(ex) ex.qty++; else cart.push({key, productId:pid, name:p.name, price:p.price, size, qty:1, image:p.images[0]});
+  saveCart(); updateCartCount();
+  showToast('Added — UK ' + size + ' 🔥');
+}
+
+function updateCartCount(){
+  const n = cart.reduce((s,i)=>s+i.qty,0);
+  const el = document.getElementById('cartCount');
+  el.textContent = n; el.classList.toggle('hidden', n===0);
+}
+
+function removeFromCart(key){
+  cart = cart.filter(i=>i.key!==key);
+  saveCart(); updateCartCount(); renderCart();
+}
+
+function changeQty(key, delta){
+  const item = cart.find(i=>i.key===key); if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0){ removeFromCart(key); return; }
+  saveCart(); updateCartCount(); renderCart();
+}
+
+function getTotal(){ return cart.reduce((s,i)=>s+i.price*i.qty,0); }
+
+// ── IMAGE HELPERS ─────────────────────────────────────────────────────────
+// Creates an img element that gracefully falls back to a placeholder on error
+function makeImgEl(src, alt, cssClass){
+  return `<img
+    src="${src}"
+    alt="${alt}"
+    class="${cssClass}"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    onerror="this.style.display='none';this.nextElementSibling&&(this.nextElementSibling.style.display='flex')"
+  >`;
+}
+
+function makePlaceholder(label){
+  return `<div class="img-placeholder" style="display:none"><span class="shoe-icon">👟</span><span>${label}</span></div>`;
+}
+
+// ── RENDER PRODUCTS ───────────────────────────────────────────────────────
+let activeFilter = 'all';
+function renderProducts(){
+  const grid = document.getElementById('productsGrid');
+  const label = document.getElementById('productLabel');
+  const list = activeFilter==='all' ? products : products.filter(p=>p.category===activeFilter);
+  label.textContent = list.length + ' Product' + (list.length!==1?'s':'');
+  if(!list.length){ grid.innerHTML='<div class="no-products">Nothing here yet.</div>'; return; }
+  grid.innerHTML = list.map(p=>`
+    <div class="product-card" onclick="openDetail('${p.id}')">
+      <div class="card-img-wrap">
+        ${makeImgEl(p.images[0], p.name, 'product-card-img')}
+        ${makePlaceholder('Image')}
+        <div class="card-tag">🔥 Showroom</div>
+        <div class="card-ship">FREE SHIP</div>
+      </div>
+      <div class="product-card-body">
+        <div class="product-card-name">${p.name}</div>
+        <div class="product-card-sub">OG Box · Butter Paper</div>
+        <div class="price-row">
+          <span class="card-price">₹${p.price.toLocaleString('en-IN')}</span>
+          <span class="card-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>
+          <span class="card-save">-25%</span>
+        </div>
+        <div class="card-actions">
+          <button class="btn-view" onclick="event.stopPropagation();openDetail('${p.id}')">Details</button>
+          <button class="btn-cart-quick" onclick="event.stopPropagation();openDetail('${p.id}')">Add to Cart</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+document.getElementById('filterRow').addEventListener('click', e=>{
+  const btn = e.target.closest('.filter-btn'); if(!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); activeFilter = btn.dataset.cat; renderProducts();
+});
+
+// ── PRODUCT DETAIL ────────────────────────────────────────────────────────
+let selSize = null, curProduct = null;
+
+function openDetail(id){
+  const p = products.find(x=>x.id===id); if(!p) return;
+  curProduct = p; selSize = null;
+  const hasSizes = p.sizes && p.sizes.length > 0;
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="detail-gallery">
+      <div class="gallery-main-wrap">
+        ${makeImgEl(p.images[0], p.name, 'gallery-main')}
+        ${makePlaceholder(p.name)}
+      </div>
+      <div class="gallery-thumbs">
+        ${p.images.map((img,i)=>`
+          <div class="gallery-thumb-wrap ${i===0?'active':''}" onclick="switchThumb(this,'${img}')">
+            ${makeImgEl(img,'View '+(i+1),'gallery-thumb')}
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-name">${p.name}</div>
+      <div class="detail-price-row">
+        <span class="detail-price">₹${p.price.toLocaleString('en-IN')}</span>
+        <span class="detail-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>
+        <span class="detail-save">Save ₹${(p.mrp-p.price).toLocaleString('en-IN')}</span>
+      </div>
+      <div class="detail-badges">
+        <span class="detail-badge">📦 OG Box Pack</span>
+        <span class="detail-badge">📌 Butter Paper</span>
+        <span class="detail-badge">🚚 Free Shipping</span>
+        <span class="detail-badge">✅ ${p.stock}</span>
+      </div>
+      ${hasSizes ? `
+      <div class="size-selector">
+        <div class="detail-section-title">Select Size (UK)</div>
+        <div class="size-grid">
+          ${p.sizes.map(s=>`
+            <button class="size-btn" onclick="selectSize(this,'${s.uk}')">
+              UK ${s.uk}<span class="eu">EU ${s.eu}</span>
+            </button>`).join('')}
+        </div>
+        <div class="size-hint" id="sizeHint">⚠ Please select a size to continue</div>
+      </div>` : ''}
+      <div class="detail-section-title">Description</div>
+      <div class="detail-desc">${p.description}</div>
+      <div class="detail-specs">
+        <div class="spec-item"><div class="spec-label">Material</div><div class="spec-value">${p.material}</div></div>
+        <div class="spec-item"><div class="spec-label">Delivery</div><div class="spec-value">${p.delivery}</div></div>
+        <div class="spec-item"><div class="spec-label">Stock</div><div class="spec-value">${p.stock}</div></div>
+        <div class="spec-item"><div class="spec-label">Packaging</div><div class="spec-value">OG Box + Butter Paper</div></div>
+      </div>
+      <button class="btn-add-to-cart" id="addToCartBtn" ${hasSizes?'disabled':''} onclick="handleAddToCart()">
+        ${hasSizes ? 'Select a Size First' : 'Add to Cart'}
+      </button>
+    </div>`;
+
+  openModal('detailModal');
+}
+
+function switchThumb(wrap, src){
+  document.querySelectorAll('.gallery-thumb-wrap').forEach(w=>w.classList.remove('active'));
+  wrap.classList.add('active');
+  const mainImg = document.querySelector('.gallery-main');
+  if(mainImg){ mainImg.style.opacity='0.4'; mainImg.src=src; mainImg.style.display=''; mainImg.onload=()=>mainImg.style.opacity='1'; }
+}
+
+function selectSize(btn, size){
+  selSize = size;
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const hint = document.getElementById('sizeHint'); if(hint) hint.classList.remove('show');
+  const ab = document.getElementById('addToCartBtn');
+  ab.disabled = false; ab.textContent = 'Add to Cart — UK ' + size;
+}
+
+function handleAddToCart(){
+  if(!curProduct) return;
+  if(curProduct.sizes && curProduct.sizes.length>0 && !selSize){
+    const hint = document.getElementById('sizeHint'); if(hint) hint.classList.add('show'); return;
+  }
+  addToCart(curProduct.id, selSize || 'One Size');
+  closeModal('detailModal');
+}
+
+// ── CART ──────────────────────────────────────────────────────────────────
+function openCart(){ renderCart(); openModal('cartModal'); }
+
+function renderCart(){
+  const content = document.getElementById('cartContent');
+  const footer  = document.getElementById('cartFooter');
+  if(!cart.length){
+    content.innerHTML = '<div class="cart-empty"><div class="icon">🛒</div><p>Your cart is empty.</p></div>';
+    footer.style.display = 'none'; return;
+  }
+  footer.style.display = 'block';
+  content.innerHTML = '<div class="cart-items">' + cart.map(item=>`
+    <div class="cart-item">
+      <img class="cart-item-img" src="${item.image}" alt="${item.name}"
+           crossorigin="anonymous" referrerpolicy="no-referrer"
+           onerror="this.src='data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\'><rect width=\\'68\\' height=\\'68\\' fill=\\'%231C1C1C\\'/></svg>'">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        ${item.size!=='One Size'?`<div class="cart-item-size">Size: UK ${item.size}</div>`:''}
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty('${item.key}',-1)">−</button>
+          <span class="qty-display">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.key}',1)">+</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+        <span class="cart-item-price">₹${(item.price*item.qty).toLocaleString('en-IN')}</span>
+        <button class="cart-item-remove" onclick="removeFromCart('${item.key}')">🗑</button>
+      </div>
+    </div>`).join('') + '</div>';
+  document.getElementById('cartTotal').textContent = '₹' + getTotal().toLocaleString('en-IN');
+}
+
+// ── CHECKOUT ──────────────────────────────────────────────────────────────
+function openCheckout(){
+  closeModal('cartModal');
+  const total = getTotal();
+
+  // Build order summary UI with Size column table
+  document.getElementById('orderSummaryMini').innerHTML = `
+    <h3>Order Summary</h3>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th style="width:42%">Product</th>
+          <th style="width:20%">Size</th>
+          <th style="width:12%">Qty</th>
+          <th style="width:26%">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${cart.map(i=>`
+          <tr>
+            <td><span class="item-name">${i.name}</span></td>
+            <td>${i.size!=='One Size'?`<span class="order-size-pill">UK ${i.size}</span>`:'<span style="color:var(--dim)">—</span>'}</td>
+            <td><span class="item-qty">× ${i.qty}</span></td>
+            <td>₹${(i.price*i.qty).toLocaleString('en-IN')}</td>
+          </tr>`).join('')}
+      </tbody>
+    </table>
+    <div class="order-mini-total"><span>Total</span><span>₹${total.toLocaleString('en-IN')}</span></div>
+    <div class="free-ship-note">🚚 Free Shipping All Over India</div>`;
+
+  // Build readable cart string for email
+  const cartStr = cart.map(i=>
+    `${i.name} | Size: UK ${i.size} | Qty: ${i.qty} | Rs.${i.price} each | Subtotal: Rs.${i.price*i.qty}`
+  ).join('\n') + `\n\nGrand Total: Rs.${total}`;
+  document.getElementById('hiddenCart').value  = cartStr;
+  document.getElementById('hiddenTotal').value = 'Rs.' + total;
+  // After Formspree submits, it redirects — set _next to current URL so it lands back here
+  document.getElementById('hiddenNext').value  = window.location.href;
+
+  openModal('checkoutModal');
+}
+
+function handleSubmit(e){
+  // Validate manually (form has required fields, so browser handles it)
+  // Mark order as pending so we can clear cart on return
+  sessionStorage.setItem('ka_order_pending', '1');
+  // Let native form POST happen (don't call e.preventDefault())
+  document.getElementById('placeOrderBtn').textContent = 'Placing Order…';
+  document.getElementById('placeOrderBtn').disabled = true;
+  return true; // allow native form submission
+}
+
+function continueShopping(){
+  closeModal('successModal');
+  document.getElementById('checkoutForm').reset();
+}
+
+// ── CHECK IF RETURNING FROM FORMSPREE ─────────────────────────────────────
+// Formspree redirects to _next (this page) after success.
+// We stored a flag in sessionStorage before submitting.
+window.addEventListener('load', ()=>{
+  if(sessionStorage.getItem('ka_order_pending')){
+    sessionStorage.removeItem('ka_order_pending');
+    cart = []; saveCart(); updateCartCount();
+    // Small delay so page is fully painted
+    setTimeout(()=>openModal('successModal'), 400);
+  }
+});
+
+// ── MODALS ────────────────────────────────────────────────────────────────
+function openModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click', e=>{ if(e.target===o) closeModal(o.id); });
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────────────
+function showToast(msg){
+  document.getElementById('toastMsg').textContent = msg;
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+renderProducts();
+updateCartCount();
+</script>
+</body>
+</html>
